@@ -5,7 +5,7 @@ import Sellbody from "./Sellbody"
 
 
 const Sell = () =>{
-    const [search,setSearch] =  useState("")
+    const [,setSearch] =  useState("")
  
     return(
         <>
