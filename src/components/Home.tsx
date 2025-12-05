@@ -45,22 +45,25 @@ const Home: React.FC<ProductsProp> = (props) => {
 
   return (
     <div className="grid grid-cols-4 p-5">
-      {combinedProducts
-        .filter((data) =>
-          data.title
-            .toLowerCase()
-            .includes(props.search.toLowerCase() || props.menu.toLowerCase())
-        )
-        .map((data) => (
-          <Link to="/details" state={{ data }} key={data.id}>
-            <div className="border border-spacing-1 p-2 ml-3 mt-3">
-              <img src={data?.image} className="w-60 h-48" alt={data.title} />
-              <h1 className="font-bold text-xl">${data.price}</h1>
-              <h1>{data.title} </h1>
-              <h1>{data.category}</h1>
-            </div>
-          </Link>
-        ))}
+     {combinedProducts
+  .filter((data) => {
+    const title = (data.title || "").toLowerCase();
+    return (
+      title.includes(props.search.toLowerCase()) ||
+      title.includes(props.menu.toLowerCase())
+    );
+  })
+  .map((data) => (
+    <Link to="/details" state={{ data }} key={data.id}>
+      <div className="border border-spacing-1 p-2 ml-3 mt-3">
+        <img src={data?.image} className="w-60 h-48" alt={data.title} />
+        <h1 className="font-bold text-xl">${data.price}</h1>
+        <h1>{data.title} </h1>
+        <h1>{data.category}</h1>
+      </div>
+    </Link>
+  ))}
+
     </div>
   );
 };
